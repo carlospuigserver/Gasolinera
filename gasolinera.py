@@ -9,17 +9,50 @@ class Gasolinera:
         self.caja=threading.Lock()
         self.abierta=True
 
-def atender_coche(self):
-    surtidor=None
-    while surtidor is None:
-        for i in range(self.num_surtidores):
-            if self.surtidores[i].acquire(blocking=False):
-                surtidor=i
+    def atender_coche(self):
+        surtidor=None
+        while surtidor is None:
+            for i in range(self.num_surtidores):
+                if self.surtidores[i].acquire(blocking=False):
+                    surtidor=i
                 break
             else:
                 time.sleep(0.1)
 
-#Llenar el deposito
-tiempo_llenar=random.randint(5*100,10*100)
-time.sleep(tiempo_llenar/100)
+
+        tiempo_llenar=random.randint(5*100,10*100)
+        time.sleep(tiempo_llenar/100)
+
+
+        with self.caja:
+         tiempo_pagar=3*100
+         time.sleep(tiempo_pagar/100)
+
+        self.surtidores[surtidor].release()
+
+
+
+
+
+class Coche(threading.Thread):
+    def __init__(self,gasolinera):
+        super().__init__()
+        self.gasolinera=gasolinera
+
+
+
+def run(self):
+ tiempo_llegada=random.randint(0,15*100)
+ time.sleep=tiempo_llegada/100
+ self.gasolinera.atender_coche()
+
+ if __name__ == "__main__":
+     gasolinera=Gasolinera(num_surtidores=1)
+     coches=[Coche(gasolinera)for i in range(50)]
+     for coche in coches:
+         coche.start()
+         for coche in coches:
+             coche.join()
+
+
 
