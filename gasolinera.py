@@ -18,3 +18,8 @@ def atender_coche(self):
                 break
             else:
                 time.sleep(0.1)
+
+#Llenar el deposito
+tiempo_llenar=random.randint(5*100,10*100)
+time.sleep(tiempo_llenar/100)
+
