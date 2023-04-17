@@ -9,3 +9,12 @@ class Gasolinera:
         self.caja=threading.Lock()
         self.abierta=True
 
+def atender_coche(self):
+    surtidor=None
+    while surtidor is None:
+        for i in range(self.num_surtidores):
+            if self.surtidores[i].acquire(blocking=False):
+                surtidor=i
+                break
+            else:
+                time.sleep(0.1)
