@@ -41,18 +41,20 @@ class Coche(threading.Thread):
 
 
 
-def run(self):
- tiempo_llegada=random.randint(0,15*100)
- time.sleep=tiempo_llegada/100
- self.gasolinera.atender_coche()
+    def run(self):
+        tiempo_llegada=random.randint(0,15*100)
+        time.sleep=tiempo_llegada/100
+        print(f"Coche {self.name} llega a la gasolinera en el tiempo{time.time()} segundos.")
+        self.gasolinera.atender_coche()
+        print(f"Coche {self.name} sale de la gasolinera en el tiempo{time.time()} segundos.")
 
- if __name__ == "__main__":
-     gasolinera=Gasolinera(num_surtidores=1)
-     coches=[Coche(gasolinera)for i in range(50)]
-     for coche in coches:
-         coche.start()
-         for coche in coches:
-             coche.join()
+if __name__ == "__main__":
+        gasolinera=Gasolinera(num_surtidores=1)
+        coches=[Coche(gasolinera)for i in range(50)]
+        for coche in coches:
+            coche.start()
+        for coche in coches:
+            coche.join()
 
 
 
